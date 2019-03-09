@@ -38,6 +38,14 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../parallax-template/service.html"));
     });
 
+    app.get("/onboard", function(req, res) {
+        res.sendFile(path.join(__dirname, "../parallax-template/onBoard.html"));
+    });
+
+    app.get("/gallary", function(req, res) {
+        res.sendFile(path.join(__dirname, "../parallax-template/portfolio.html"));
+    });
+
 
 
     // app.get("/dog", function(req, res) {
