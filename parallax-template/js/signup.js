@@ -1,7 +1,7 @@
 
 $("#submit-btn").on("click", function(event) {
     event.preventDefault();
-
+    console.log($("#pet_name1"))
     var newCustomer = {
         customer_name: $("#customer_name").val().trim(),
         email: $("#email").val().trim(),

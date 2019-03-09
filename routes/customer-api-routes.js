@@ -31,7 +31,9 @@ module.exports = function(app) {
             city: req.body.city,
             state: req.body.state,
             zip: req.body.zip,
-            pet_name: req.body.pet_name,
+            pet_name1: req.body.pet_name1,
+            pet_name2: req.body.pet_name2,
+            pet_name3: req.body.pet_name3,
             comments: req.body.comments
         }).then(function(dbCustomer) {
             res.json(dbCustomer);
