@@ -12,4 +12,27 @@
     background-size: cover;
     /* background-color: blue 
 
-  } 
+  } */
+
+  nav ul a,
+  nav .brand-logo {
+    color: #444;
+  }
+
+.sidenav-trigger {
+    color: #26a69a;
+  }
+
+h1{
+  font-family: 'Fredericka the Great', cursive;
+}
+
+h4{
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.button{
+    margin-left: 300px;
+    margin-right:300px;
+
+}
