@@ -1,4 +1,6 @@
 var db = require("../models");
+var passport = require("../config/passport");
+
 
 module.exports = function(app) {
     app.get("/api/customer", function(req, res) {
@@ -9,15 +11,10 @@ module.exports = function(app) {
         });
     });
 
-    app.get("/api/customer/:id", function(req, res) {
-        db.Customer.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: [db.Dog]
-        }).then(function(dbCustomer) {
-            res.json(dbCustomer);
-        });
+
+
+    app.post("/api/login", passport.authenticate("local"), function(req, res) { 
+        res.json("/members");
     });
 
     app.post("/api/new", function(req, res) {
@@ -33,12 +30,14 @@ module.exports = function(app) {
             zip: req.body.zip,
             pet_name1: req.body.pet_name1,
             pet_name2: req.body.pet_name2,
-            pet_name3: req.body.pet_name3,
-            comments: req.body.comments
-        }).then(function(dbCustomer) {
-            res.json(dbCustomer);
-            console.log(dbCustomer);
-            
+            pet_name3: req.body.pet_name3
+            // textarea1: req.body.textarea1
+        }).then(function() {
+            res.redirect(307, "/members");
+
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);    
         });
     });
 

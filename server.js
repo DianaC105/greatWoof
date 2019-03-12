@@ -5,6 +5,8 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
+var passport = require("./config/passport");
+var session = require('express-session');
 
 // Sets up the Express App
 // =============================================================
@@ -22,6 +24,11 @@ app.use(express.json());
 // app.use(express.static("public"));
 app.use(express.static("parallax-template"));
 
+app.use(session({ secret: "doggo", resave: true,
+saveUninitialized: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
 // =============================================================
 
@@ -35,9 +42,9 @@ require("./routes/customer-api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
 });
-/////change force: true to false ^^^^
+/////change force: true to false BEFORE DEPLOYMENT^^^^
