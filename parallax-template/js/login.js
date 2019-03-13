@@ -1,23 +1,60 @@
 $(document).ready(function() {
+    var emailInput = "";
+    var passInput = "";
     var logIn = $("form.login");
-    var emailInput = $("iput#email");
-    var passInput = $("input#password");
+  
+  
 
     logIn.on("submit", function(event) {
+
+        emailInput = $("input[name=login-email]").val();
+        passInput = $("input[name=login-password]").val();
+       
         event.preventDefault();
         var userData = {
-            email: emailInput.val().trim(),
-            password: passInput.val().trim()
+            email: emailInput,
+            customer_password: passInput
+            
         };
 
-        if (!userData.email || !userData.password) {
+        console.log(userData);
+
+        if (!userData.email || !userData.customer_password) {
             return;
         }
 
-        userLogin(userData.email, userData.password);
-        emailInput.val("");
-        passInput.val("");
+        loginCust(userData);
+
+        // console.log(userData + "login userdata");
+
+       function loginCust (userData) {
+           $.post("/api/login", userData)
+           .then(function () {
+               window.location.replace("/members");
+               
+           });
+       };
+
+
+
+
+        // $.post("/api/login", userData)
+        // .then(function() {
+        //     //console.log(data);
+        //     // window.location.href = "http://localhost:8080/members";
+
+        // });
+
+       
+
+
+        // userLogin(userData);
+        // emailInput.val("");
+        // passInput.val("");
+        // console.log(userData + "login userdata function");
     });
 
-    function userLog
-})
+    // function userLogin (data) {
+
+    // }
+});
