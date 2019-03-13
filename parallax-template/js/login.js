@@ -6,10 +6,10 @@ $(document).ready(function() {
   
 
     logIn.on("submit", function(event) {
-        emailInput = ("input#email");
-        passInput = ("input#password");
-        
 
+        emailInput = $("input[name=login-email]").val();
+        passInput = $("input[name=login-password]").val();
+       
         event.preventDefault();
         var userData = {
             email: emailInput,
@@ -17,25 +17,46 @@ $(document).ready(function() {
             
         };
 
-        console.log(userData + "login userdata");
+        console.log(userData);
 
         if (!userData.email || !userData.customer_password) {
             return;
         }
 
-        console.log(userData + "login userdata");
+        // console.log(userData + "login userdata");
 
-        userLogin(userData);
-        // emailInput.val("");
-        // passInput.val("");
-        console.log(userData + "login userdata function");
-    });
+        // app.get('/api/login', function(req, res, next) {
+        //     passport.authenticate('local', function(err, userData, info) {
+        //       if (err) { return next(err); }
+        //       if (!userData) { return res.redirect('/login'); }
+        //       req.logIn(userData, function(err) {
+        //         if (err) { return next(err); }
+        //         return res.redirect('/members');
+        //       });
+        //     })(req, res, next);
+        //   });
+    
 
-    function userLogin (data) {
-        $.post("/api/login",  data)
+
+
+
+        $.post("/api/login", userData)
         .then(function() {
-            window.location.replace("/members");
+            console.log(userData);
+            // window.location.href = "http://localhost:8080/members";
+
         });
 
-    }
+       
+
+
+        // userLogin(userData);
+        // emailInput.val("");
+        // passInput.val("");
+        // console.log(userData + "login userdata function");
+    });
+
+    // function userLogin (data) {
+
+    // }
 });

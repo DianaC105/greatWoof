@@ -11,8 +11,6 @@ module.exports = function(app) {
         });
     });
 
-
-
     // app.post("/api/login", passport.authenticate("local"), function(req, res) { 
        
     //     console.log(res + "api/routes");
@@ -20,9 +18,28 @@ module.exports = function(app) {
     //     res.redirect("/members");
     // });
 
-    app.post('/api/login', passport.authenticate('local', { successRedirect: 
-        '/members',
-    failureRedirect: '/login' }));
+    // app.post('/api/login', passport.authenticate('local', 
+    // { 
+    //     successRedirect: "/members",
+    //     failureRedirect: "/"
+    // }));
+
+    app.get('/api/login', function(req, res, next) {
+        passport.authenticate('local', function(err, userData) {
+          if (err) { return next(err); }
+          if (!userData) { return res.redirect('/login'); }
+          req.logIn(userData, function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/members');
+          });
+        
+        })(req, res, next);
+
+        console.log(err);
+        console.log(req);
+      });
+
+
 
     app.post("/api/new", function(req, res) {
         console.log("*********");
