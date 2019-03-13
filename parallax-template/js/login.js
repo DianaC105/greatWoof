@@ -23,29 +23,27 @@ $(document).ready(function() {
             return;
         }
 
+        loginCust(userData);
+
         // console.log(userData + "login userdata");
 
-        // app.get('/api/login', function(req, res, next) {
-        //     passport.authenticate('local', function(err, userData, info) {
-        //       if (err) { return next(err); }
-        //       if (!userData) { return res.redirect('/login'); }
-        //       req.logIn(userData, function(err) {
-        //         if (err) { return next(err); }
-        //         return res.redirect('/members');
-        //       });
-        //     })(req, res, next);
-        //   });
-    
+       function loginCust (userData) {
+           $.post("/api/login", userData)
+           .then(function () {
+               window.location.replace("/members");
+               
+           });
+       };
 
 
 
 
-        $.post("/api/login", userData)
-        .then(function() {
-            console.log(userData);
-            // window.location.href = "http://localhost:8080/members";
+        // $.post("/api/login", userData)
+        // .then(function() {
+        //     //console.log(data);
+        //     // window.location.href = "http://localhost:8080/members";
 
-        });
+        // });
 
        
 

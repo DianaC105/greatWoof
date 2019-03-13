@@ -13,6 +13,9 @@ module.exports = function(app) {
     });
 
     app.get("/login", function(req, res) {
+        // if (req.userData) {
+        //     res.redirect("/members");
+        //   }
         res.sendFile(path.join(__dirname, "../parallax-template/login.html"));
     });
 
@@ -49,7 +52,7 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../parallax-template/portfolio.html"));
     });
 
-    app.get("/members", isAuthenticated, function(req, res) {
+    app.get("/members", function(req, res) {
         res.sendFile(path.join(__dirname, "../parallax-template/members.html"));
     });
 
