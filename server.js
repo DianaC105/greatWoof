@@ -5,9 +5,14 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
+
+const sendMail = require('./mail');
+const path = require('path');
+
 var passport = require("./config/passport");
 var session = require('express-session');
 var bodyParser = require("body-parser");
+
 
 // Sets up the Express App
 // =============================================================
@@ -23,7 +28,9 @@ app.use(express.json());
 
 // Static directory
 // app.use(express.static("public"));
-app.use(express.static("parallax-template"));
+
+app.use(express.static("./parallax-template/"));
+
 
 app.use(session({ secret: "doggo", resave: true,
 saveUninitialized: true}));
@@ -36,6 +43,32 @@ app.use(passport.session());
 require("./routes/html-routes.js")(app);
 require("./routes/customer-api-routes.js")(app);
 
+app.post('/email', (req, res) => {
+  console.log(req.body.email);
+  var mailform = "<h1>New Service Request.</h1> \nFrom: "+req.body.email
+  +"\nPhone #: "+req.body.phone+"\nService Requested: "+req.body.service
+  +"\nOn: "+req.body.date+"\nAt: "+req.body.time+"\nMessage: "
+  +req.body.spreq;
+  console.log(mailform);
+  var hsubject = "New Service Request!";
+  sendMail(hsubject, mailform, function(err, data){
+    if(err){
+      res.status(500).json({message: 'Internal Error'});
+    } else{
+      res.json({ message: 'Email Sent!'});
+    }
+  });
+  //const {subject, email, text } = req.body;
+  //console.log('Data: ', req.body);
+
+  /*sendMail(email, subject, text, function(err, data){
+    if(err){
+      res.status(500).json({ message: 'Internal Error'});
+    } else{
+      res.json({ message: 'Email sent!!!'});
+    }
+  });*/
+});
 
 // require("./routes/html-routes.js");
 // require("./routes/customer-api-routes.js");
