@@ -13,27 +13,35 @@ module.exports = function(app) {
 
 
 
-    app.post("/api/login", passport.authenticate("local"), function(req, res) { 
-        res.json("/members");
-    });
+    // app.post("/api/login", passport.authenticate("local"), function(req, res) { 
+       
+    //     console.log(res + "api/routes");
+    //     // res.json("/members");
+    //     res.redirect("/members");
+    // });
+
+    app.post('/api/login', passport.authenticate('local', { successRedirect: 
+        '/members',
+    failureRedirect: '/login' }));
 
     app.post("/api/new", function(req, res) {
-        console.log(req.body)
+        console.log("*********");
+        console.log("*****"+req.body.customer_name);
         db.Customer.create({
             customer_name: req.body.customer_name,
             email: req.body.email,
-            password: req.body.password,
-            phone: req.body.phone,
+            customer_password: req.body.customer_password,
+            //phone: req.body.phone,
             street: req.body.street,
             city: req.body.city,
-            state: req.body.state,
+            customer_state: req.body.customer_state,
             zip: req.body.zip,
             pet_name1: req.body.pet_name1,
             pet_name2: req.body.pet_name2,
             pet_name3: req.body.pet_name3
             // textarea1: req.body.textarea1
         }).then(function() {
-            res.redirect(307, "/members");
+            res.redirect("/login");
 
         }).catch(function(err) {
             console.log(err);

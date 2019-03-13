@@ -7,19 +7,19 @@ passport.use(new LocalStrategy({
     usernameField: "email",
     passwordField: "password"
 },
-function(email, password, done) {
+function(email, customer_password, done) {
     db.Customer,findOne({
         where: {
             usernameField: email,
-            passwordField: password
+            passwordField: customer_password
         }
-    }).then(function(dbUser) {
+    }).then(function(dbCustomer) {
         if (!dbCustomer) {
             return done(null, false, {
                 message: "Invalid Email"
             });
         }
-        else if (!dbCustomer.validPassword(password)) {
+        else if (!dbCustomer.validPassword(customer_password)) {
             return done(null, false, {
                 message: "Invalid Password"
             });

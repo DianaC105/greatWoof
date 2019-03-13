@@ -1,4 +1,5 @@
 var path = require("path");
+var isAuthenticated = require("../config/middleware/isAuth");
 
 module.exports = function(app) {
     app.get ("/", function(req, res) {
@@ -48,7 +49,7 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../parallax-template/portfolio.html"));
     });
 
-    app.get("/members", function(req, res) {
+    app.get("/members", isAuthenticated, function(req, res) {
         res.sendFile(path.join(__dirname, "../parallax-template/members.html"));
     });
 

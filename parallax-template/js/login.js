@@ -1,32 +1,41 @@
 $(document).ready(function() {
+    var emailInput = "";
+    var passInput = "";
     var logIn = $("form.login");
-    var emailInput = $("input#email");
-    var passInput = $("input#password");
+  
+  
 
     logIn.on("submit", function(event) {
+        emailInput = ("input#email");
+        passInput = ("input#password");
+        
+
         event.preventDefault();
         var userData = {
-            email: emailInput.val().trim(),
-            password: passInput.val().trim()
+            email: emailInput,
+            customer_password: passInput
+            
         };
 
-        if (!userData.email || !userData.password) {
+        console.log(userData + "login userdata");
+
+        if (!userData.email || !userData.customer_password) {
             return;
         }
 
-        userLogin(userData.email, userData.password);
-        emailInput.val("");
-        passInput.val("");
+        console.log(userData + "login userdata");
+
+        userLogin(userData);
+        // emailInput.val("");
+        // passInput.val("");
+        console.log(userData + "login userdata function");
     });
 
-    function userLogin (email, password) {
-        $.post("api/login", {
-            email: email,
-            password: password
-        }).then(function(data) {
-            window.location.replace(data);
-        }).catch(function(err) {
-            console.log(err);
+    function userLogin (data) {
+        $.post("/api/login",  data)
+        .then(function() {
+            window.location.replace("/members");
         });
+
     }
 });
