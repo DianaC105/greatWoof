@@ -35,8 +35,9 @@ module.exports = function(app) {
     });
 
     app.get("/request", function(req, res) {
-        res.sendFile(path.join(__dirname, "../parallax-template/service.html"));
+        res.sendFile(path.join(__dirname, "../parallax-template/serviceSelect.html"));
     });
+    
 
 
 
