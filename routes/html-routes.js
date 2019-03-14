@@ -33,7 +33,7 @@ module.exports = function(app) {
     });
 
     app.get("/visit", function(req, res) {
-        res.sendFile(path.join(__dirname, "../parallax-template/dropinVisits.html"));
+        res.sendFile(path.join(__dirname, "../parallax-template/dropInVisits.html"));
     });
 
     app.get("/food", function(req, res) {
