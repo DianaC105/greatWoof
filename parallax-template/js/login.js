@@ -30,7 +30,7 @@ $(document).ready(function() {
        function loginCust (userData) {
            $.post("/api/login", userData)
            .then(function () {
-               window.location.replace("/members");
+               window.location.replace("/requests");
                
            });
        };
