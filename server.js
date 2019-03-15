@@ -5,7 +5,7 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
-
+require("dotenv").config();
 const sendMail = require('./mail');
 const path = require('path');
 
