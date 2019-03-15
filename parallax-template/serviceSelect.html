@@ -237,9 +237,9 @@
                 selectable: true,
                 weekends: false,
                 
-                googleCalendarApiKey: 'AIzaSyCa-X0sbQqRu6JzBELxBySCVNljG1Dq094',
+                googleCalendarApiKey: process.env.GC_API,
                 events: {
-                    googleCalendarId: '3d76l0im1lmuiuirmb4e0uq9f0@group.calendar.google.com'   
+                    googleCalendarId: process.env.GC_ID  
                 },
                 dayClick: function(date){
                   if(date.isBefore(moment())){
